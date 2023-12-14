@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 
 export const getUsers = (req, res) => {
-  const query = `SELECT * FROM clientes`;
+  const query = `SELECT * FROM users`;
 
   db.query(query, (err, result) => {
     if (err) {
@@ -15,7 +15,7 @@ export const getUsers = (req, res) => {
 export const getUser = (req, res) => {
   const cpf = req.params.cpf;
 
-  const query = `SELECT * FROM cliente WHERE cpf = ?`;
+  const query = `SELECT * FROM users WHERE cpf = ?`;
 
   db.query(query, [cpf], (err, result) => {
     console.log(err);
@@ -24,7 +24,7 @@ export const getUser = (req, res) => {
     }
 
     if (result.length === 0) {
-      return res.status(404).json({ message: "Cliente não encontrado" });
+      return res.status(404).json({ message: "Usuário não encontrado" });
     }
 
     return res.status(200).json(result);
@@ -32,42 +32,38 @@ export const getUser = (req, res) => {
 };
 
 export const postUser = (req, res) => {
-  const newClient = req.body;
+  const newUser = req.body;
   const {
-    nome_completo,
-    rg,
-    orgao_emissor_rg,
-    uf_rg,
     cpf,
-    data_nascimento,
-    telefone,
+    nome_completo,
     email,
-    tipo_de_logradouro,
-    nome_logradouro,
-    numero,
-    bairro,
-    estado,
+    telefone,
     cep,
-  } = newClient;
+    estado,
+    cidade,
+    bairro,
+    endereco,
+    numero,
+    complemento,
+    senha,
+  } = newUser;
 
   const requiredFields = [
-    "nome_completo",
-    "rg",
-    "orgao_emissor_rg",
-    "uf_rg",
     "cpf",
-    "data_nascimento",
-    "telefone",
+    "nome_completo",
     "email",
-    "tipo_de_logradouro",
-    "nome_logradouro",
-    "numero",
-    "bairro",
-    "estado",
+    "telefone",
     "cep",
+    "estado",
+    "cidade",
+    "bairro",
+    "endereco",
+    "numero",
+    "complemento",
+    "senha",
   ];
 
-  const missingFields = requiredFields.filter((campo) => !(campo in newClient));
+  const missingFields = requiredFields.filter((campo) => !(campo in newUser));
 
   if (missingFields.length > 0) {
     return res
@@ -76,27 +72,25 @@ export const postUser = (req, res) => {
   }
 
   const query = `
-    INSERT INTO cliente (nome_completo, rg, orgao_emissor_rg, uf_rg, cpf, data_nascimento, telefone, email, tipo_de_logradouro, nome_logradouro, numero, bairro, estado, cep)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO users (cpf, nome_completo, email, telefone, cep, estado, cidade, bairro, endereco, numero, complemento, senha)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   db.query(
     query,
     [
-      nome_completo,
-      rg,
-      orgao_emissor_rg,
-      uf_rg,
       cpf,
-      data_nascimento,
-      JSON.stringify(telefone),
-      JSON.stringify(email),
-      tipo_de_logradouro,
-      nome_logradouro,
-      numero,
-      bairro,
-      estado,
+      nome_completo,
+      email,
+      telefone,
       cep,
+      estado,
+      cidade,
+      bairro,
+      endereco,
+      numero,
+      complemento,
+      senha,
     ],
     (err, result) => {
       console.log(err);
@@ -104,11 +98,11 @@ export const postUser = (req, res) => {
         return res.status(500).json({ error: err.message });
       }
 
-      const clienteId = result.insertId;
+      const userId = result.insertId;
 
       return res
         .status(200)
-        .json({ message: "Cliente inserido com sucesso.", clienteId });
+        .json({ message: "Usuário inserido com sucesso.", userId });
     }
   );
 };
@@ -132,7 +126,7 @@ export const updateUser = (req, res) => {
 
   values.push(clientCPF);
   const query = `
-    UPDATE cliente SET ${updates.join(", ")} WHERE cpf = ?
+    UPDATE users SET ${updates.join(", ")} WHERE cpf = ?
   `;
 
   db.query(query, values, (err, result) => {
@@ -141,20 +135,20 @@ export const updateUser = (req, res) => {
       return res.status(500).json({ error: err.message });
     }
 
-    return res.status(200).json({ message: "Cliente atualizado com sucesso." });
+    return res.status(200).json({ message: "Usuário atualizado com sucesso." });
   });
 };
 
 export const deleteUser = (req, res) => {
-  const clientCPF = req.params.cpf;
+  const userCPF = req.params.cpf;
 
-  const query = `DELETE FROM cliente WHERE cpf = ?`;
+  const query = `DELETE FROM users WHERE cpf = ?`;
 
-  db.query(query, [clientCPF], (err, result) => {
+  db.query(query, [userCPF], (err, result) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
 
-    return res.status(200).json({ message: "Cliente deletado com sucesso." });
+    return res.status(200).json({ message: "Usuário deletado com sucesso." });
   });
 };

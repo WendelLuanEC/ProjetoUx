@@ -4,7 +4,7 @@ import checkToken  from "../middlewares/checkToken.js";
 
 const router = express.Router();
 
-router.get("/user/:cpf", checkToken, getUser);
-router.get("/users", checkToken, getUsers);
+router.get("/user/:cpf", getUser);
+router.get("/users", getUsers);
 
 export default router;
