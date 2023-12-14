@@ -1,10 +1,10 @@
 import express from "express";
 
-import { addCliente } from "../controllers/cliente.js";
+import { postUser } from "../controllers/user.js";
 
 
 const router = express.Router();
 
-router.post("/addCliente", addCliente);
+router.post("/user", postUser);
 
 export default router;

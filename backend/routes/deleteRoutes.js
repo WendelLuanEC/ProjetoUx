@@ -2,8 +2,8 @@ import express from "express";
 
 const router = express.Router();
 
-import { deleteCliente } from "../controllers/cliente.js";
+import { deleteUser } from "../controllers/user.js";
 
-router.delete("/deletarCliente/:cpf", deleteCliente);
+router.delete("/user/:cpf", deleteUser);
 
 export default router;

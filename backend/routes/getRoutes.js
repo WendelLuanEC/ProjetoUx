@@ -1,11 +1,10 @@
 import express from "express";
-import { getClientes, getInfoCliente } from "../controllers/cliente.js";
+import { getUsers, getUser } from "../controllers/user.js";
 import checkToken  from "../middlewares/checkToken.js";
 
 const router = express.Router();
 
-router.get("/getClientes", checkToken, getClientes);
-
-router.get("/getInfoCliente/:cpf", checkToken, getInfoCliente);
+router.get("/user/:cpf", checkToken, getUser);
+router.get("/users", checkToken, getUsers);
 
 export default router;

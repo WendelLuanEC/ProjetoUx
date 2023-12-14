@@ -1,6 +1,6 @@
 import { db } from "../db.js";
 
-export const getClientes = (req, res) => {
+export const getUsers = (req, res) => {
   const query = `SELECT * FROM clientes`;
 
   db.query(query, (err, result) => {
@@ -12,7 +12,7 @@ export const getClientes = (req, res) => {
   });
 };
 
-export const getInfoCliente = (req, res) => {
+export const getUser = (req, res) => {
   const cpf = req.params.cpf;
 
   const query = `SELECT * FROM cliente WHERE cpf = ?`;
@@ -31,7 +31,7 @@ export const getInfoCliente = (req, res) => {
   });
 };
 
-export const addCliente = (req, res) => {
+export const postUser = (req, res) => {
   const newClient = req.body;
   const {
     nome_completo,
@@ -113,7 +113,7 @@ export const addCliente = (req, res) => {
   );
 };
 
-export const updateCliente = (req, res) => {
+export const updateUser = (req, res) => {
   const clientCPF = req.params.cpf;
   const body = req.body;
   const updates = [];
@@ -145,7 +145,7 @@ export const updateCliente = (req, res) => {
   });
 };
 
-export const deleteCliente = (req, res) => {
+export const deleteUser = (req, res) => {
   const clientCPF = req.params.cpf;
 
   const query = `DELETE FROM cliente WHERE cpf = ?`;
