@@ -13,7 +13,6 @@ const Login = () => {
 
   const [currentScreen, setCurrentScreen] = useState(1);
   const [loginSelected, setLoginSelected] = useState(null);
-  const [role, setRole] = useState(0);
 
   const [loadingRequest, setLoadingRequest] = useState(false);
   const [data, setData] = useState({
@@ -21,17 +20,13 @@ const Login = () => {
     password: "",
   });
 
-  const handleScreen = (num, role) => {
+  const handleScreen = (num) => {
     setCurrentScreen(num);
 
     setData({
       login: "",
       password: "",
     });
-
-    if (role) {
-      setRole(role);
-    }
   };
 
   const login = async () => {
@@ -42,7 +37,6 @@ const Login = () => {
         .post("http://localhost:8800/login", {
           login: data.login,
           password: data.password,
-          role: role,
         })
         .then((resp) => {
           localStorage.setItem("jwt_session", resp.data.token);
@@ -64,15 +58,6 @@ const Login = () => {
   return (
     <styles.Container>
       {currentScreen === 1 && (
-        <styles.BoxesContainer>
-          <styles.BoxItem onClick={() => handleScreen(2, 2)}>
-            <UserList size={38} color="#222" />
-            <h3>Faça login para continuar</h3>
-          </styles.BoxItem>
-        </styles.BoxesContainer>
-      )}
-
-      {currentScreen === 2 && (
         <>
           <styles.FormContainer>
             <styles.FormTitle>
