@@ -1,4 +1,27 @@
-.meal {
+/* .meal {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .meal h3 {
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .description {
+    font-style: italic;
+  }
+  
+  .price {
+    margin-top: 0.25rem;
+    font-weight: bold;
+    color: #ad5502;
+    font-size: 1.25rem;
+  } */
+
+  .meal {
     display: flex;
     justify-content: space-between;
     margin: 1rem;
@@ -20,3 +43,14 @@
     color: #ad5502;
     font-size: 1.25rem;
   }
+  
+  .image {
+    margin-right: 1rem; /* Adicione margem à direita para separar a imagem do conteúdo */
+  }
+  
+  .image img {
+    width: 100%; /* Ajuste a largura da imagem para ocupar 100% do contêiner */
+    max-width: 10rem; /* Defina uma largura máxima para a imagem, se necessário */
+    border-radius: 8px; /* Adicione borda arredondada à imagem, se desejar */
+  }
+  

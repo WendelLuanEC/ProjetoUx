@@ -3,10 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 import Login from "./pages/Login";
-import Dashboard from "./pages/private/Dashboard";
 import NotFound from "./pages/NotFound";
-import axios from "axios";
-import NewClient from "./pages/private/NewClient";
 
 import Home from "./pages/private/Home";
 
