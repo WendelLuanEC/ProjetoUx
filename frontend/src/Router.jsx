@@ -7,8 +7,8 @@ import Dashboard from "./pages/private/Dashboard";
 import NotFound from "./pages/NotFound";
 import axios from "axios";
 import NewClient from "./pages/private/NewClient";
-import NewWorker from "./pages/private/NewWorker";
-import NewDependent from "./pages/private/NewDepedent";
+
+import Home from "./pages/private/Home";
 
 const Router = () => {
   const PrivateRoute = ({ children }) => {
@@ -28,10 +28,10 @@ const Router = () => {
         <Route path="/" element={<Login />} />
 
         <Route
-          path="/dashboard/:id?/:cpf?"
+          path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Home />
             </PrivateRoute>
           }
         />

@@ -2,7 +2,7 @@ import { db } from "../db.js";
 import bcrypt from "bcrypt"; 
 
 export const getUsers = (req, res) => {
-  const query = `SELECT * FROM users`;
+  const query = `SELECT * FROM clientes`;
 
   db.query(query, (err, result) => {
     if (err) {

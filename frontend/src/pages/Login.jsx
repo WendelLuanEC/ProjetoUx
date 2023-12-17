@@ -57,7 +57,7 @@ const Login = () => {
 
   return (
     <styles.Container>
-      {currentScreen === 1 && (
+      {
         <>
           <styles.FormContainer>
             <styles.FormTitle>
@@ -98,7 +98,7 @@ const Login = () => {
             </styles.ButtonSubmit>
           </styles.FormContainer>
         </>
-      )}
+      }
 
       <ToastContainer />
     </styles.Container>

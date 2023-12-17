@@ -14,7 +14,6 @@ export const login = (req, res) => {
       }
 
       const cliente = data[0];
-
       if (cliente.length === 0) {
         return res.status(400).json(({error: "Usuario e/ou senha invalidos"}))
       }
@@ -27,7 +26,7 @@ export const login = (req, res) => {
       }
       if (bcryptResult) {
         // Senhas correspondem, proceda com a geração do token JWT
-        const token = jwt.sign({ matricula: cliente.matricula }, 'bancodedados', { expiresIn: '2d' });
+        const token = jwt.sign({ nome: cliente.nome_completo, role: 1, cpf: cliente.cpf, cliente:cliente }, 'bancodedados', { expiresIn: '2d' });
         return res.status(200).json({ ...cliente, token });
       } else {
         // Senhas não correspondem

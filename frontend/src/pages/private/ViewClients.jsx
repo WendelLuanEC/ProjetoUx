@@ -5,8 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 import * as styles from "./css/TableStyles.css";
 
-import EditModal from "../../components/EditModal";
-import OverlayModal from "../../components/OverlayModal";
+// import EditModal from "../../components/EditModal";
+// import OverlayModal from "../../components/OverlayModal";
 
 const ViewClientes = ({ role, infoClient }) => {
   const [clientData, setClientData] = useState([]);

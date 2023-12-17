@@ -7,11 +7,6 @@ import { SignOut, UserCircle } from "phosphor-react";
 import * as styles from "./css/Dashboard.css";
 
 import Client from "./Client";
-import Agency from "./Agency";
-import Worker from "./Worker";
-import Dependent from "./Dependent";
-import Transaction from "./Transaction";
-import Account from "./Account";
 
 const Dashboard = () => {
   const { id, cpf } = useParams();
@@ -19,7 +14,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState([]);
   const [role, setRole] = useState(0);
-
+  const [cliente] = useState([]);
   const [currentSidebarItem, setCurrentSidebarItem] = useState("client");
 
   const navigate = useNavigate();
@@ -30,48 +25,46 @@ const Dashboard = () => {
       const decoded = jwtDecode(localStorage.getItem("jwt_session"));
       setRole(decoded.role);
       decodedRole = decoded.role;
-
-      if (decoded.role === 1 && id) {
-        navigate("/dashboard");
-      }
     } catch (e) {
       localStorage.clear();
       navigate("/");
     }
 
-    if (decodedRole === 2) {
-      await axios
-        .get(`http://localhost:8800/getInfoFuncionario/${id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_session")}`,
-          },
-        })
-        .then((resp) => {
-          setUserInfo(resp.data[0]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    // if (decodedRole === 1) {
+    //   await axios
+    //     .get(`http://localhost:8800/user/${cpf}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("jwt_session")}`,
+    //       },
+    //     })
+    //     .then((resp) => {
+    //       setUserInfo(resp.data[0]);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
 
-    if (decodedRole === 3) {
-      await axios
-        .get(`http://localhost:8800/getInfoCliente/${cpf}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt_session")}`,
-          },
-        })
-        .then((resp) => {
-          console.log(resp);
-          setUserInfo(resp.data[0]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    //   await axios
+    //     .get(`http://localhost:8800/user/${setUserInfo.cpf}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("jwt_session")}`,
+    //       },
+    //     })
+    //     .then((resp) => {
+    //       setUserInfo(resp.data[0]);
+    //       //console.log(userInfo);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+
     setLoading(false);
   };
 
+  const api = axios.create({
+    baseURL: "",
+  });
   useEffect(() => {
     getInfo();
   }, []);
@@ -92,19 +85,15 @@ const Dashboard = () => {
                 <UserCircle size={50} weight="thin" />
               </div>
 
-              <h2>
-                Olá, {role === 1 && "Administrador/DBA"}
-                {role === 2 && userInfo.nome_completo}
-                {role === 3 && userInfo.nome_completo}
-              </h2>
+              <h2>Olá, {userInfo.nome_completo}</h2>
 
               <p>{role === 2 && `Cargo: ${userInfo.cargo}`} </p>
             </styles.HeaderSidebar>
 
             <styles.SidebarMenu>
-              {role !== 3 && (
+              {
                 <ul>
-                  {role === 1 && (
+                  {
                     <li
                       style={
                         currentSidebarItem === "client"
@@ -117,7 +106,7 @@ const Dashboard = () => {
                     >
                       Cliente
                     </li>
-                  )}
+                  }
                   <li
                     style={
                       currentSidebarItem === "account"
@@ -130,7 +119,7 @@ const Dashboard = () => {
                   >
                     Conta
                   </li>
-                  {role === 1 && (
+                  {
                     <li
                       style={
                         currentSidebarItem === "agency"
@@ -143,8 +132,8 @@ const Dashboard = () => {
                     >
                       Agência
                     </li>
-                  )}
-                  {role === 1 && (
+                  }
+                  {
                     <li
                       style={
                         currentSidebarItem === "worker"
@@ -157,8 +146,8 @@ const Dashboard = () => {
                     >
                       Funcionário
                     </li>
-                  )}
-                  {role === 1 && (
+                  }
+                  {
                     <li
                       style={
                         currentSidebarItem === "dependent"
@@ -171,8 +160,8 @@ const Dashboard = () => {
                     >
                       Dependente
                     </li>
-                  )}
-                  {role === 1 && (
+                  }
+                  {
                     <li
                       style={
                         currentSidebarItem === "transaction"
@@ -185,9 +174,9 @@ const Dashboard = () => {
                     >
                       Transação
                     </li>
-                  )}
+                  }
                 </ul>
-              )}
+              }
             </styles.SidebarMenu>
 
             <styles.FooterSidebar>
