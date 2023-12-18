@@ -4,6 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as styles from "./css/Login.css.jsx";
 import { jwtDecode } from "jwt-decode";
@@ -85,7 +86,10 @@ const Login = () => {
                 onChange={(e) => setData({ ...data, password: e.target.value })}
               />
             </styles.Label>
-
+            <p>
+              Não possui conta?
+              <Link to="/register">Cadastre-se aqui</Link>
+            </p>
             <styles.ButtonSubmit
               onClick={() => login()}
               style={
@@ -97,17 +101,6 @@ const Login = () => {
               {loadingRequest ? "Entrando..." : "Entrar"}
             </styles.ButtonSubmit>
           </styles.FormContainer>
-
-          <styles.ButtonSubmit
-            onClick={() => navigation(`/register`)}
-            style={
-              !data.login || !data.password
-                ? { backgroundColor: "#aaa" }
-                : { backgroundColor: "#222" }
-            }
-          >
-            {loadingRequest ? "Entrando..." : "Entrar"}
-          </styles.ButtonSubmit>
         </>
       }
 

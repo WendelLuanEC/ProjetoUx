@@ -28,10 +28,6 @@ export default function MealItem(props) {
         <div className={classes.price}>{price}</div>
       </div>
 
-      <div className={classes.image}>
-        <img src={props.image} alt={props.name} />
-      </div>
-
       <div>
         <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
       </div>

@@ -123,7 +123,7 @@ const Register = () => {
             <styles.Label>
               <span>CEP</span>
               <InputMask
-                mask="99999-9999"
+                mask="99999-999"
                 maskChar="_"
                 value={data.cep}
                 onChange={(e) => {

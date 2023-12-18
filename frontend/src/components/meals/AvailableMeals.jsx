@@ -68,35 +68,30 @@ const DUMMY_MEALS = [
     name: "Sushi",
     description: "Os melhores peixes e legumes",
     price: 22.99,
-    image: "/src/assets/sushi.jpg", // Adicione o caminho da imagem aqui
   },
   {
     id: "m2",
     name: "Schnitzel",
     description: "Uma especialidade alemã!",
     price: 16.5,
-    image: "", // Adicione o caminho da imagem aqui
   },
   {
     id: "m3",
     name: "Barbecue Burger",
     description: "Americano, cru, carnudo",
     price: 12.99,
-    image: "path/to/burger-image.jpg", // Adicione o caminho da imagem aqui
   },
   {
     id: "m4",
     name: "Green Bowl",
     description: "Saudável... e verde...",
     price: 18.99,
-    image: "path/to/bowl-image.jpg", // Adicione o caminho da imagem aqui
   },
   {
     id: "m5",
     name: "Caipirinha",
     description: "Drink... e cachaça nordestina...",
     price: 18.99,
-    image: "path/to/caipirinha-image.jpg", // Adicione o caminho da imagem aqui
   },
 ];
 
@@ -112,7 +107,6 @@ const AvailableMeals = () => {
               name={meal.name}
               description={meal.description}
               price={meal.price}
-              image={meal.image} // Passe a propriedade de imagem para o componente MealItem
             />
           ))}
         </ul>

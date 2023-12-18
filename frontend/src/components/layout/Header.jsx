@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./Header.module.css";
-
+import "react-toastify/dist/ReactToastify.css";
 import HeaderCartButton from "./HeaderCartButton";
 
 export default function Header(props) {
@@ -11,7 +11,6 @@ export default function Header(props) {
         <h1>DeliveryMeals</h1>
         <HeaderCartButton onClick={props.onShowModal} />
       </header>
-
       <div className={classes["main-image"]}>
         <img src="/assets/meals.jpg" alt="Table with a lot of foods" />
       </div>
