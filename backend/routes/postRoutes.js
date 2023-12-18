@@ -5,6 +5,6 @@ import checkToken from "../middlewares/checkToken.js";
 
 const router = express.Router();
 
-router.post("/user", checkToken, postUser);
+router.post("/user", postUser);
 
 export default router;

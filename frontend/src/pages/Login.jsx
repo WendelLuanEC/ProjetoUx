@@ -3,7 +3,7 @@ import { CaretCircleLeft, User, UserGear, UserList } from "phosphor-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import * as styles from "./css/Login.css.jsx";
 import { jwtDecode } from "jwt-decode";
@@ -97,6 +97,17 @@ const Login = () => {
               {loadingRequest ? "Entrando..." : "Entrar"}
             </styles.ButtonSubmit>
           </styles.FormContainer>
+
+          <styles.ButtonSubmit
+            onClick={() => navigation(`/register`)}
+            style={
+              !data.login || !data.password
+                ? { backgroundColor: "#aaa" }
+                : { backgroundColor: "#222" }
+            }
+          >
+            {loadingRequest ? "Entrando..." : "Entrar"}
+          </styles.ButtonSubmit>
         </>
       }
 
