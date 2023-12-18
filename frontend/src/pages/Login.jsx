@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CaretCircleLeft, User, UserGear, UserList } from "phosphor-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,53 +8,38 @@ import { Link } from "react-router-dom";
 
 import * as styles from "./css/Login.css.jsx";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 const Login = () => {
   const navigation = useNavigate();
-
-  const [currentScreen, setCurrentScreen] = useState(1);
-  const [loginSelected, setLoginSelected] = useState(null);
-
+  const { login } = useContext(AuthContext);
   const [loadingRequest, setLoadingRequest] = useState(false);
+
   const [data, setData] = useState({
     login: "",
     password: "",
   });
 
-  const handleScreen = (num) => {
-    setCurrentScreen(num);
-
-    setData({
-      login: "",
-      password: "",
-    });
-  };
-
-  const login = async () => {
+  const handleLogin = async () => {
     setLoadingRequest(true);
-
-    try {
-      await axios
-        .post("http://localhost:8800/login", {
-          login: data.login,
-          password: data.password,
-        })
-        .then((resp) => {
-          localStorage.setItem("jwt_session", resp.data.token);
-
-          navigation(`/dashboard`);
-        });
-      //${resp.data.matricula}
-    } catch (e) {
+    const result = await login(data.login, data.password);
+    if (result === true) {
+      navigation(`/home`);
+    } else {
       toast("Login e/ou senha incorreto!", {
         autoClose: 3000,
         theme: "light",
       });
-      console.log(e);
     }
-
     setLoadingRequest(false);
   };
+
+  useEffect(() => {
+    try {
+      jwtDecode(localStorage.getItem("jwt_session"));
+      navigation("/home");
+    } catch (error) {}
+  }, []);
 
   return (
     <styles.Container>
@@ -91,7 +76,7 @@ const Login = () => {
               <Link to="/register">Cadastre-se aqui</Link>
             </p>
             <styles.ButtonSubmit
-              onClick={() => login()}
+              onClick={() => handleLogin()}
               style={
                 !data.login || !data.password
                   ? { backgroundColor: "#aaa" }

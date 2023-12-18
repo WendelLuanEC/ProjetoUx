@@ -1,23 +1,26 @@
-// import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import { AuthContext } from "./context/AuthContext";
 
 import Home from "./pages/private/Home";
+import { useContext } from "react";
 
 const Router = () => {
   const PrivateRoute = ({ children }) => {
+    const { isAuthenticated } = useContext(AuthContext);
+    let decoded;
     try {
-      jwtDecode(localStorage.getItem("jwt_session"));
-    } catch (e) {
-      localStorage.clear();
-      return <Navigate to="/" />;
+      decoded = jwtDecode(localStorage.getItem("jwt_session"));
+    } catch (e) {}
+    if (isAuthenticated || decoded) {
+      return children;
     }
-
-    return children;
+    localStorage.clear();
+    return <Navigate to="/" />;
   };
 
   return (
@@ -26,7 +29,7 @@ const Router = () => {
         <Route path="/" element={<Login />} />
 
         <Route
-          path="/dashboard"
+          path="/home"
           element={
             <PrivateRoute>
               <Home />
