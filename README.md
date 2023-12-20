@@ -45,6 +45,24 @@ npm run dev
 ```
 7. Abra o seguinte link no navegador: http://localhost:5173/
 
-## Fazendo registro no sistema: 
+## Como usar o Ux Delivery: 
+1. Esta é a tela de login, para fazer cadastro no sistema, clique em cadastre-se aqui:
+![Tela de Login](https://github.com/WendelLuanEC/assets/blob/master/1-%20login.PNG)
 
+2. Esta é a tela de cadastro no sistema, preencha os campos e clique no botão cadastrar:
+![Tela de Registro](https://github.com/WendelLuanEC/assets/blob/master/2-%20registro.PNG) 
 
+3. Após isso, você será redirecionado para a tela de login, entre usando o e-mail cadastrado e a senha:
+![Tela de login](https://github.com/WendelLuanEC/assets/blob/master/4-%20login%20com%20credenciais.PNG)
+
+4. Esta é a home da aplicação, aqui você tem acesso ao cardápio e ao carrinho com suas compras:
+![Home](https://github.com/WendelLuanEC/assets/blob/master/5%20-%20home%20da%20aplica%C3%A7%C3%A3o.PNG)
+
+5. Este é o cardápio, você pode escolher a quantidade e adicionar ao carrinho clicando no botão +Add:
+![Cardapio](https://github.com/WendelLuanEC/assets/blob/master/6%20-%20cardapio.PNG)
+
+6. Você pode ver os pedidos que você adicionou ao carrinho clicando no ícone carrinho:
+![Carrinho](https://github.com/WendelLuanEC/assets/blob/master/8%20-%20carrinho.png)
+
+7. Este é o seu carrinho, você pode diminuir e aumentar a quantidade de cada pedido, além de visualizar o total da sua compra:
+![Carrinho](https://github.com/WendelLuanEC/assets/blob/master/9%20-%20itens%20no%20carrinho.PNG)
