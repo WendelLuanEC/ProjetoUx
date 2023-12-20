@@ -45,19 +45,51 @@ const Register = () => {
     }
   };
 
+  // const register = async () => {
+  //   setLoadingRequest(true);
+
+  //   try {
+  //     await axios.post("http://localhost:8800/user", data);
+  //     toast("Usuário cadastrado com sucesso!", {
+  //       autoClose: 3000,
+  //       theme: "light",
+  //     });
+  //     navigation("/"); // Redireciona para a página de login após o cadastro
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast("Erro ao cadastrar usuário. Tente novamente.", {
+  //       autoClose: 3000,
+  //       theme: "light",
+  //     });
+  //   }
+
+  //   setLoadingRequest(false);
+  // };
+
   const register = async () => {
     setLoadingRequest(true);
 
     try {
-      await axios.post("http://localhost:8800/user", data);
-      toast("Usuário cadastrado com sucesso!", {
-        autoClose: 3000,
-        theme: "light",
-      });
-      console.log("Registrado");
-      navigation("/"); // Redireciona para a página de login após o cadastro
+      const response = await axios.post("http://localhost:8800/user", data);
+
+      if (response.status === 200) {
+        // Se o código de status da resposta for 200 (OK), o usuário foi cadastrado com sucesso
+        toast("Usuário cadastrado com sucesso!", {
+          autoClose: 3000,
+          theme: "light",
+          onClose: () => {
+            navigation("/"); // Redireciona para a página de login após o cadastro
+          },
+        });
+      } else {
+        // Se o código de status não for 200, algo deu errado
+        toast("Erro ao cadastrar usuário. Tente novamente.", {
+          autoClose: 3000,
+          theme: "light",
+        });
+      }
     } catch (error) {
-      console.error("Erro ao cadastrar usuário", error);
+      console.error(error);
       toast("Erro ao cadastrar usuário. Tente novamente.", {
         autoClose: 3000,
         theme: "light",
@@ -220,7 +252,7 @@ const Register = () => {
                   : { backgroundColor: "#222" }
               }
             >
-              {loadingRequest ? "Entrando..." : "Entrar"}
+              {loadingRequest ? "Submetendo..." : "Cadastrar"}
             </styles.ButtonSubmit>
           </styles.FormContainer>
         </>

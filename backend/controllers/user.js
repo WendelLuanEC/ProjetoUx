@@ -72,15 +72,6 @@ export const postUser = (req, res) => {
       .json({ error: `Campos faltando: ${missingFields.join(", ")}` });
   }
 
-  // const hash = bcrypt.hash(newUser.senha, 10, (err, hash) => {
-  //   if (err) {
-  //     console.error('Erro ao criar hash:', err);
-  //     // Trate o erro conforme necessário
-  //   } else {
-  //     // `hash` contém a senha hashada que você pode armazenar no banco de dados
-  //   }
-  // });
-
   const hash = bcrypt.hashSync(newUser.senha, 10);
   const query = `
     INSERT INTO users (cpf, nome_completo, email, telefone, cep, estado, cidade, bairro, endereco, numero, complemento, senha)
